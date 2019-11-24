@@ -6,7 +6,6 @@ import lombok.Setter;
 import ua.edu.ucu.utils.immutable.ImmutableLinkedList;
 import ua.edu.ucu.utils.immutable.TwoWayNode;
 
-import javax.imageio.ImageTranscoder;
 import java.util.Iterator;
 
 public class Queue implements Iterable {
@@ -43,22 +42,6 @@ public class Queue implements Iterable {
     @Override
     public Iterator iterator() {
         return new QueueIterator(this);
-    }
-
-    public static void main(String[] args)
-    {
-        // Create Linked List
-        Queue myList = new Queue();
-
-        // Add Elements
-        myList.enqueue("abc");
-        myList.enqueue("mno");
-        myList.enqueue("pqr");
-        myList.enqueue("xyz");
-
-        // Iterate through the list using For Each Loop
-        for (Object string : myList)
-            System.out.println(string);
     }
 }
 
