@@ -66,6 +66,12 @@ public class PrefixMatchesITTest {
         PrefixMatches prefixm = new PrefixMatches(new RWayTrie());
         int result = prefixm.load(strings);
         assertEquals(6, result);
+
+
+        String[] strings2 = {" Olena goes"};
+        PrefixMatches prefixm2 = new PrefixMatches(new RWayTrie());
+        int result2 = prefixm2.load(strings2);
+        assertEquals(2, result2);
     }
 
     @Test
