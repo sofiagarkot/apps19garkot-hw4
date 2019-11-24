@@ -1,9 +1,10 @@
 package ua.edu.ucu.autocomplete;
 
-import ua.edu.ucu.tries.RWayTrie;
 import ua.edu.ucu.tries.Trie;
 import ua.edu.ucu.tries.Tuple;
 import ua.edu.ucu.utils.Queue;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -57,11 +58,15 @@ public class PrefixMatches {
     }
 
     public Iterable<String> wordsWithPrefix(String pref, int k) {
+        ArrayList lengths = new ArrayList();
         if (pref.length() >= 2) {
             Queue q = new Queue();
             for (String word : this.wordsWithPrefix(pref)) {
-                if (word.length() <= 2+k) {
+                if (lengths.size() < k || lengths.contains(word.length())) {
                     q.enqueue(word);
+                    if (!lengths.contains(word.length())) {
+                        lengths.add(word.length());
+                    }
                 }
             }
             return q;
