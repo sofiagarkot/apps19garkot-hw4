@@ -2,8 +2,6 @@ package ua.edu.ucu.tries;
 
 import ua.edu.ucu.utils.Queue;
 
-import java.util.Iterator;
-
 
 public class RWayTrie implements Trie {
     static int R = 256;
@@ -41,9 +39,13 @@ public class RWayTrie implements Trie {
     }
 
     public Object get(String key) {
-        if (key == null) throw new IllegalArgumentException("argument to get() is null");
+        if (key == null) {
+            throw new IllegalArgumentException("argument to get() is null");
+        }
         Node x = get(root, key, 0);
-        if (x == null) return null;
+        if (x == null) {
+            return null;
+        }
         return x.val;
     }
 
@@ -77,17 +79,25 @@ public class RWayTrie implements Trie {
     }
 
     private Node delete(Node x, String word, int d) {
-        if (x == null) return null;
+        if (x == null) {
+            return null;
+        }
         if (d == word.length()) {
-            if (x.val != 0) n--;
+            if (x.val != 0) {
+                n--;
+            }
             x.val = 0;
         } else {
             char c = word.charAt(d);
             x.next[c] = delete(x.next[c], word, d + 1);
         }
-        if (x.val != 0) return x;
+        if (x.val != 0) {
+            return x;
+        }
         for (char c = 0; c < R; c++) {
-            if (x.next[c] != null) return x;
+            if (x.next[c] != null) {
+                return x;
+            }
         }
         return null;
     }
