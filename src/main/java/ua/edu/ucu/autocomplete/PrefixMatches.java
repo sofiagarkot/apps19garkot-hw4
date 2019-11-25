@@ -6,10 +6,6 @@ import ua.edu.ucu.utils.Queue;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author andrii
- */
 public class PrefixMatches {
 
     private Trie trie;
@@ -19,14 +15,14 @@ public class PrefixMatches {
     }
 
     public int load(String... strings) {
-        for (int i =0; i < strings.length; i++) {
+        for (int i = 0; i < strings.length; i++) {
             while (strings[i].contains(" ")) {
                 int indx = strings[i].indexOf(" ");
                 if (indx == 0) {
-                    strings[i] =  strings[i].substring(1, strings[i].length());
-                } else{
-                    String newWord = strings[i].substring(0,indx);
-                    strings[i] =  strings[i].substring(indx+1, strings[i].length());
+                    strings[i] = strings[i].substring(1, strings[i].length());
+                } else {
+                    String newWord = strings[i].substring(0, indx);
+                    strings[i] = strings[i].substring(indx + 1, strings[i].length());
                     if (newWord.length() > 2) {
                         Tuple word = new Tuple(newWord, newWord.length());
                         this.trie.add(word);
