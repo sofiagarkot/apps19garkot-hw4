@@ -43,13 +43,15 @@ public class Queue implements Iterable {
     public Iterator iterator() {
         return new QueueIterator(this);
     }
+
 }
 
 class QueueIterator implements Iterator {
-    TwoWayNode current;
+
+    private TwoWayNode current;
 
     QueueIterator(Queue q) {
-        current =  q.peek();
+        current = q.peek();
     }
 
     public boolean hasNext() {
