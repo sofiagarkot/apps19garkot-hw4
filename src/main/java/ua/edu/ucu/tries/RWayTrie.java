@@ -4,7 +4,7 @@ import ua.edu.ucu.utils.Queue;
 
 
 public class RWayTrie implements Trie {
-    private static int R = 256;
+    private static final int R = 256;
 
     private Node root;
     private int n = 0;
