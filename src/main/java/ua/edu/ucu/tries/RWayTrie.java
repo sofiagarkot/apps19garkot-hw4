@@ -4,12 +4,12 @@ import ua.edu.ucu.utils.Queue;
 
 
 public class RWayTrie implements Trie {
-    static int R = 256;
+    private static int R = 256;
 
-    Node root;
+    private Node root;
     private int n = 0;
 
-    static class Node {
+    private static class Node {
         int val;
         Node[] next = new Node[R];
     }
