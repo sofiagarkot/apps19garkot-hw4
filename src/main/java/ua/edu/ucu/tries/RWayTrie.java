@@ -1,19 +1,23 @@
 package ua.edu.ucu.tries;
+
 import ua.edu.ucu.utils.Queue;
+
+import java.util.Iterator;
 
 
 public class RWayTrie implements Trie {
-    private static int R = 256;
+    static int R = 256;
 
-    private Node root;
+    Node root;
     private int n = 0;
 
-    private static class Node {
+    static class Node {
         int val;
         Node[] next = new Node[R];
     }
 
-    public RWayTrie() {}
+    public RWayTrie() {
+    }
 
     @Override
     public void add(Tuple t) {
@@ -32,11 +36,11 @@ public class RWayTrie implements Trie {
             return x;
         }
         char c = key.charAt(d);
-        x.next[c] = add(x.next[c], key, val, d+1);
+        x.next[c] = add(x.next[c], key, val, d + 1);
         return x;
     }
 
-      public Object get(String key) {
+    public Object get(String key) {
         if (key == null) throw new IllegalArgumentException("argument to get() is null");
         Node x = get(root, key, 0);
         if (x == null) return null;
@@ -45,13 +49,13 @@ public class RWayTrie implements Trie {
 
     @Override
     public boolean contains(String word) {
-        if (word == null ) {
+        if (word == null) {
             throw new IllegalArgumentException("Argument to contains() is null");
         }
         return get(root, word, 0) != null;
     }
 
-    private Node get(Node x,String word, int d) {
+    public Node get(Node x, String word, int d) {
         if (x == null) {
             return null;
         }
@@ -59,13 +63,13 @@ public class RWayTrie implements Trie {
             return x;
         }
         char c = word.charAt(d);
-        return get(x.next[c], word, d+1);
+        return get(x.next[c], word, d + 1);
     }
 
     @Override
     public boolean delete(String word) {
         if (word == null) {
-            throw new IllegalArgumentException(("Argument to delete(0 in null"));
+            throw new IllegalArgumentException("Argument to delete(0 in null");
         }
         boolean result = contains(word);
         root = delete(root, word, 0);
@@ -79,7 +83,7 @@ public class RWayTrie implements Trie {
             x.val = 0;
         } else {
             char c = word.charAt(d);
-            x.next[c] = delete(x.next[c], word, d+1);
+            x.next[c] = delete(x.next[c], word, d + 1);
         }
         if (x.val != 0) return x;
         for (char c = 0; c < R; c++) {
@@ -96,17 +100,19 @@ public class RWayTrie implements Trie {
     @Override
     public Iterable<String> wordsWithPrefix(String s) {
         Queue q = new Queue();
-        collect(get(root,s, 0), s, q);
+        collect(get(root, s, 0), s, q);
         return q;
     }
 
-    private void collect( Node x, String pre, Queue q) {
-        if (x == null) {return;}
+    private void collect(Node x, String pre, Queue q) {
+        if (x == null) {
+            return;
+        }
         if (x.val != 0) {
             q.enqueue(pre);
         }
         for (char c = 0; c < R; c++) {
-            collect(x.next[c], pre+c, q);
+            collect(x.next[c], pre + c, q);
         }
     }
 
@@ -114,4 +120,5 @@ public class RWayTrie implements Trie {
     public int size() {
         return n;
     }
+
 }
